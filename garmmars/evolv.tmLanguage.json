@@ -14,11 +14,27 @@
         },
         {
             "name": "keyword.control.evolv",
-            "match": "\\b(if|else|while|for|return|function|class|package|import)\\b"
+            "match": "\\b(if|else|while|for|return|function|class|package|import|export)\\b"
         },
         {
             "name": "storage.type.evolv",
-            "match": "\\b(int|float|double|string|qbit|qreg)\\b"
+            "match": "\\b(int|float|double|string|qbit|qreg|boolean|void)\\b"
+        },
+        {
+            "name": "entity.name.class.evolv",
+            "match": "\\bclass\\s+[A-Za-z_][A-Za-z0-9_]*\\b"
+        },
+        {
+            "name": "entity.name.function.evolv",
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*\\()"
+        },
+        {
+            "name": "keyword.import.evolv",
+            "match": "\\b(import|export)\\b"
+        },
+        {
+            "name": "keyword.package.evolv",
+            "match": "\\bpackage\\b"
         },
         {
             "name": "string.quoted.double.evolv",
@@ -34,10 +50,6 @@
         {
             "name": "constant.numeric.evolv",
             "match": "\\b\\d+(\\.\\d+)?\\b"
-        },
-        {
-            "name": "entity.name.function.evolv",
-            "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*\\()"
         }
     ],
     "repository": {},
