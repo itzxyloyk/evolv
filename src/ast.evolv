@@ -1,0 +1,75 @@
+// src/ast.evolv
+
+class ASTNode {
+    static function createProgram(statements) {
+        return new Program(statements);
+    }
+
+    static function createVariableDeclaration(identifier, expression) {
+        return new VariableDeclaration(identifier, expression);
+    }
+
+    static function createExpressionStatement(expression) {
+        return new ExpressionStatement(expression);
+    }
+
+    static function createVariable(identifier) {
+        return new Variable(identifier);
+    }
+
+    static function createNumber(value) {
+        return new Number(value);
+    }
+
+    static function createBinaryExpression(left, operator, right) {
+        return new BinaryExpression(left, operator, right);
+    }
+}
+
+class Program {
+    var statements;
+    function initialize(statements) {
+        this.statements = statements;
+    }
+}
+
+class VariableDeclaration {
+    var identifier;
+    var expression;
+    function initialize(identifier, expression) {
+        this.identifier = identifier;
+        this.expression = expression;
+    }
+}
+
+class ExpressionStatement {
+    var expression;
+    function initialize(expression) {
+        this.expression = expression;
+    }
+}
+
+class Variable {
+    var identifier;
+    function initialize(identifier) {
+        this.identifier = identifier;
+    }
+}
+
+class Number {
+    var value;
+    function initialize(value) {
+        this.value = value;
+    }
+}
+
+class BinaryExpression {
+    var left;
+    var operator;
+    var right;
+    function initialize(left, operator, right) {
+        this.left = left;
+        this.operator = operator;
+        this.right = right;
+    }
+}
