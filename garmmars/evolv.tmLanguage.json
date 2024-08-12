@@ -1,0 +1,45 @@
+{
+    "name": "Evolv",
+    "scopeName": "source.evolv",
+    "fileTypes": ["evolv"],
+    "patterns": [
+        {
+            "name": "comment.line.double-slash.evolv",
+            "match": "//.*$"
+        },
+        {
+            "name": "comment.block.evolv",
+            "begin": "/\\*",
+            "end": "\\*/"
+        },
+        {
+            "name": "keyword.control.evolv",
+            "match": "\\b(if|else|while|for|return|function|class|package|import)\\b"
+        },
+        {
+            "name": "storage.type.evolv",
+            "match": "\\b(int|float|double|string|qbit|qreg)\\b"
+        },
+        {
+            "name": "string.quoted.double.evolv",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.evolv",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        {
+            "name": "constant.numeric.evolv",
+            "match": "\\b\\d+(\\.\\d+)?\\b"
+        },
+        {
+            "name": "entity.name.function.evolv",
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*\\()"
+        }
+    ],
+    "repository": {},
+    "scopeName": "source.evolv"
+}
