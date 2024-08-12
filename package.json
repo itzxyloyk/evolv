@@ -1,0 +1,27 @@
+{
+  "name": "Evolv",
+  "version": "1.0.0",
+  "description": "Syntax highlighting for the Evolv programming language.",
+  "keywords": ["evolv", "syntax", "highlighting"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itzxyloyke/evolv.git"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "evolv",
+        "aliases": ["Evolv", "evolv"],
+        "extensions": [".evolv"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "evolv",
+        "scopeName": "source.evolv",
+        "path": "./grammars/evolv.tmLanguage.json"
+      }
+    ]
+  }
+}
