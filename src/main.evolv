@@ -1,0 +1,14 @@
+// main.evolv
+import "parser.evolv";
+import "lexer.evolv";
+import "stdlib/core.evolv";
+
+function main() {
+    // Initialize the interpreter/compiler
+    var sourceCode = readSourceFile("input.evolv");
+    var tokens = lexer.tokenize(sourceCode);
+    var ast = parser.parse(tokens);
+    execute(ast);
+}
+
+main();
