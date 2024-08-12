@@ -4,10 +4,19 @@ import "lexer.evolv";
 import "stdlib/core.evolv";
 
 function main() {
-    // Initialize the interpreter/compiler
     var sourceCode = readSourceFile("input.evolv");
-    var tokens = lexer.tokenize(sourceCode);
-    var ast = parser.parse(tokens);
+    var lexer = new Lexer(sourceCode);
+    var tokens = [];
+    
+    // Collect all tokens
+    var token = lexer.next();
+    while (token.type != TokenType.EOF) {
+        tokens.push(token);
+        token = lexer.next();
+    }
+    
+    var parser = new Parser(tokens);
+    var ast = parser.parse();
     execute(ast);
 }
 
