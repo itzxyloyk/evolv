@@ -1,6 +1,6 @@
 ### Evolv Programming Language: Overview
 ## Introduction
-# Evolv is a sophisticated object-oriented programming language designed for high versatility and flexibility in software development. It stands out due to its highly advanced features, including the ability to create and integrate libraries directly within the source code. Evolv is engineered to support a wide range of programming paradigms and use cases, making it a powerful tool for both traditional and cutting-edge applications.
+### Evolv is a sophisticated object-oriented programming language designed for high versatility and flexibility in software development. It stands out due to its highly advanced features, including the ability to create and integrate libraries directly within the source code. Evolv is engineered to support a wide range of programming paradigms and use cases, making it a powerful tool for both traditional and cutting-edge applications.
 
 # Core Features
 # Object-Oriented Paradigm:
