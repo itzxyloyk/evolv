@@ -1,0 +1,95 @@
+// src/parser.evolv
+
+import "lexer.evolv";
+import "ast.evolv";
+
+// The Parser class will convert tokens into an Abstract Syntax Tree (AST)
+class Parser {
+    private var tokens;
+    private var currentToken;
+
+    function initialize(tokenStream) {
+        tokens = tokenStream;
+        currentToken = tokens.next(); // Initialize with the first token
+    }
+
+    // Parse function to start parsing
+    function parse() -> ASTNode {
+        return program(); // Starting point of the parsing
+    }
+
+    // Program rule: program = statement+
+    private function program() -> ASTNode {
+        var statements = [];
+        while (!currentToken.isEOF()) {
+            statements.push(statement());
+        }
+        return ASTNode.createProgram(statements);
+    }
+
+    // Statement rule: statement = (variableDeclaration | expressionStatement)
+    private function statement() -> ASTNode {
+        if (currentToken.type == "keyword" && currentToken.value == "var") {
+            return variableDeclaration();
+        } else {
+            return expressionStatement();
+        }
+    }
+
+    // Variable declaration: var <identifier> = <expression>;
+    private function variableDeclaration() -> ASTNode {
+        consume("keyword", "var");
+        var identifier = consume("identifier");
+        consume("operator", "=");
+        var expr = expression();
+        consume("operator", ";");
+        return ASTNode.createVariableDeclaration(identifier, expr);
+    }
+
+    // Expression statement: <expression>;
+    private function expressionStatement() -> ASTNode {
+        var expr = expression();
+        consume("operator", ";");
+        return ASTNode.createExpressionStatement(expr);
+    }
+
+    // Expression rule: <expression> = <identifier> | <number> | <binaryExpression>
+    private function expression() -> ASTNode {
+        if (currentToken.type == "identifier") {
+            return variable();
+        } else if (currentToken.type == "number") {
+            return number();
+        } else {
+            return binaryExpression();
+        }
+    }
+
+    // Variable rule: <identifier>
+    private function variable() -> ASTNode {
+        var identifier = consume("identifier");
+        return ASTNode.createVariable(identifier);
+    }
+
+    // Number rule: <number>
+    private function number() -> ASTNode {
+        var number = consume("number");
+        return ASTNode.createNumber(number);
+    }
+
+    // Binary expression rule: <expression> <operator> <expression>
+    private function binaryExpression() -> ASTNode {
+        var left = expression();
+        var operator = consume("operator");
+        var right = expression();
+        return ASTNode.createBinaryExpression(left, operator, right);
+    }
+
+    // Consume the current token if it matches the expected type and value
+    private function consume(expectedType, expectedValue) {
+        if (currentToken.type == expectedType && currentToken.value == expectedValue) {
+            currentToken = tokens.next(); // Move to the next token
+        } else {
+            throw "Unexpected token: " + currentToken.value;
+        }
+    }
+}
