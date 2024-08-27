@@ -2,7 +2,6 @@
 
 import "utils/string_utils.evolv";
 
-// Define token types
 enum TokenType {
     IDENTIFIER,
     NUMBER,
@@ -13,7 +12,6 @@ enum TokenType {
     ERROR
 }
 
-// Define a Token class to represent individual tokens
 class Token {
     var type;
     var value;
@@ -24,7 +22,6 @@ class Token {
     }
 }
 
-// The Lexer class will convert source code into tokens
 class Lexer {
     private var input;
     private var position;
@@ -36,7 +33,6 @@ class Lexer {
         currentChar = input[position];
     }
 
-    // Returns the next token from the source code
     function next() -> Token {
         while (currentChar != null) {
             if (isWhitespace(currentChar)) {
@@ -63,29 +59,24 @@ class Lexer {
         return new Token(TokenType.EOF, null);
     }
 
-    // Check if the current character is a whitespace
     private function isWhitespace(char) -> bool {
         return char == ' ' || char == '\t' || char == '\n' || char == '\r';
     }
 
-    // Skip whitespace characters
     private function skipWhitespace() {
         while (isWhitespace(currentChar)) {
             advance();
         }
     }
 
-    // Check if the current character is a letter
     private function isLetter(char) -> bool {
         return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
     }
 
-    // Check if the current character is a digit
     private function isDigit(char) -> bool {
         return char >= '0' && char <= '9';
     }
 
-    // Tokenize identifiers or keywords
     private function identifierOrKeyword() -> Token {
         var value = "";
         while (isLetter(currentChar) || isDigit(currentChar)) {
@@ -98,7 +89,6 @@ class Lexer {
         return new Token(TokenType.IDENTIFIER, value);
     }
 
-    // Tokenize numbers
     private function number() -> Token {
         var value = "";
         while (isDigit(currentChar)) {
@@ -108,7 +98,6 @@ class Lexer {
         return new Token(TokenType.NUMBER, value);
     }
 
-    // Tokenize strings
     private function string() -> Token {
         advance(); // Skip opening quote
         var value = "";
@@ -123,21 +112,18 @@ class Lexer {
         return new Token(TokenType.STRING, value);
     }
 
-    // Tokenize operators like +, -, *, /
     private function operator() -> Token {
         var value = currentChar;
         advance();
         return new Token(TokenType.OPERATOR, value);
     }
 
-    // Tokenize single-character operators and delimiters like ;, =, (, )
     private function singleCharOperator() -> Token {
         var value = currentChar;
         advance();
         return new Token(TokenType.OPERATOR, value);
     }
 
-    // Advance to the next character in the input
     private function advance() {
         position += 1;
         if (position >= input.length()) {
