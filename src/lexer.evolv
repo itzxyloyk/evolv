@@ -99,7 +99,7 @@ class Lexer {
     }
 
     private function string() -> Token {
-        advance(); // Skip opening quote
+        advance();
         var value = "";
         while (currentChar != '"') {
             if (currentChar == null) {
@@ -108,7 +108,7 @@ class Lexer {
             value += currentChar;
             advance();
         }
-        advance(); // Skip closing quote
+        advance();
         return new Token(TokenType.STRING, value);
     }
 
